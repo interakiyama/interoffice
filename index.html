@@ -24,29 +24,34 @@
     <p style="margin-top: 10px;">
         送信できない場合は、<a href="ms-settings:defaultapps" style="color: blue; text-decoration: underline;">メール設定はこちら</a>から既定のメールアプリを設定し、再度送信ボタンを押してください。
     </p>
-    <script>
-        // ページ読み込み時にURLパラメータから元のメール件名を取得
-        const urlParams = new URLSearchParams(window.location.search);
-        const originalSubject = decodeURIComponent(urlParams.get('subject')) || "件名なし";
+<script>
+    // ページ読み込み時にURLパラメータから元のメール件名を取得
+    const urlParams = new URLSearchParams(window.location.search);
+    const originalSubject = decodeURIComponent(urlParams.get('subject')) || "件名なし";
 
-        // フォームの送信処理
-        document.getElementById("emailForm").addEventListener("submit", function (event) {
-            event.preventDefault(); // デフォルト動作を停止
+    // フォームの送信処理
+    document.getElementById("emailForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // デフォルト動作を停止
 
-            // 選択肢を取得
-            const form = event.target;
-            const choice = form.choice.value;
+        // 選択肢を取得
+        const form = event.target;
+        const choice = form.choice.value;
 
-            // メール本文を作成
-            const emailBody = `仮押さえ予約番号: ${originalSubject}\n選択肢: ${choice}`;
-            const encodedBody = encodeURIComponent(emailBody);
+        // メール本文を作成
+        const emailBody = `仮押さえ予約番号: ${originalSubject}\n選択肢: ${choice}`;
+        const encodedBody = encodeURIComponent(emailBody);
 
-            // メールリンクを生成
-            const mailtoLink = `mailto:rezervation@interoffice.co.jp?subject=${encodeURIComponent("仮押さえ解除予告の返信")}&body=${encodedBody}`;
+        // 件名に元メール件名を追加
+        const mailtoSubject = `仮押さえ解除予告の返信 - ${originalSubject}`;
+        const encodedSubject = encodeURIComponent(mailtoSubject);
 
-            // メールリンクを開く（メールアプリが起動）
-            window.location.href = mailtoLink;
-        });
-    </script>
+        // メールリンクを生成
+        const mailtoLink = `mailto:rezervation@interoffice.co.jp?subject=${encodedSubject}&body=${encodedBody}`;
+
+        // メールリンクを開く（メールアプリが起動）
+        window.location.href = mailtoLink;
+    });
+</script>
+
 </body>
 </html>
