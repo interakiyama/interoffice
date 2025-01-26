@@ -17,11 +17,13 @@
             <p style="margin-left: 5px; font-size: 1em; color: rgb(22, 21, 21);">
             ※特別な仮押さえ期間を希望の場合は元メールに返信をお願いします
             </p>
-        </div>
+        </div><br>
         <!-- 送信ボタン -->
         <button type="submit">送信</button>
     </form>
-
+    <p style="margin-top: 10px;">
+        送信できない場合は、<a href="ms-settings:defaultapps" style="color: blue; text-decoration: underline;">メール設定はこちら</a>から既定のメールアプリを設定し、再度送信ボタンを押してください。
+    </p>
     <script>
         // ページ読み込み時にURLパラメータから元のメール件名を取得
         const urlParams = new URLSearchParams(window.location.search);
@@ -36,7 +38,7 @@
             const choice = form.choice.value;
 
             // メール本文を作成
-            const emailBody = `元のメール件名: ${originalSubject}\n選択肢: ${choice}`;
+            const emailBody = `仮押さえ予約番号: ${originalSubject}\n選択肢: ${choice}`;
             const encodedBody = encodeURIComponent(emailBody);
 
             // メールリンクを生成
