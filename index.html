@@ -38,7 +38,7 @@
         const choice = form.choice.value;
 
         // メール本文を作成
-        const emailBody = `仮押さえ予約番号: ${originalSubject}\n選択肢: ${choice}`;
+        const emailBody = `※何も入力せずこのまま送信してください\n仮押さえ予約番号: ${originalSubject}\n選択肢: ${choice}`;
         const encodedBody = encodeURIComponent(emailBody);
 
         // 件名に元メール件名を追加
